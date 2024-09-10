@@ -24,9 +24,10 @@
       "dom"
     ],
     "paths": {
-      "test-lib": [
-        "./dist/test-lib"
+      "ngx-material-paginator": [
+        "./dist/ngx-material-paginator"
       ]
+      
     }
   },
   "angularCompilerOptions": {

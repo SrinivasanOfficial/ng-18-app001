@@ -14,4 +14,10 @@ import { NgxMaterialPaginatorModule } from '../../../ngx-material-paginator/src/
 })
 export class AppComponent {
   title = 'app001';
+
+  configData = {
+    curpage: 1,
+    perPage: 10,
+    totalRecords: 123
+  }
 }

@@ -5,10 +5,17 @@
     </button>
   </div>
   <div class="page-num-container-cls">
-    <button mat-button>1</button>
-    <button mat-button mat-flat-button>2</button>
+    @for(val of loopBtnArr; track val.pageNum){ @if(val.activeCls){
+    <button mat-button mat-flat-button>{{ val.pageNum }}</button>
+    }@else {
+    <button (click)="nmploadPage(val.pageNum)" mat-button>
+      {{ val.pageNum }}
+    </button>
+    } }
+
+    <!-- <button mat-button mat-flat-button>2</button>
     <button mat-button>3</button>
-    <button mat-button>4</button>
+    <button mat-button>4</button> -->
   </div>
   <div class="arrow-cls">
     <button mat-mini-fab aria-label="Example icon button with a heart icon">

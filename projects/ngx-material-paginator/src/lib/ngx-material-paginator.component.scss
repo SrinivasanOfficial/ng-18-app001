@@ -1,4 +1,15 @@
 .nmp-main-container-cls {
   display: flex;
   flex-direction: row;
+
+  .nmp-page-num-container-cls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+
+    .npm-three-dot-cls {
+      font-weight: bold;
+    }
+  }
 }

@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'app001';
 
   configData = {
-    curpage: 1,
+    curpage: 5,
     perPage: 10,
     totalRecords: 123
   }

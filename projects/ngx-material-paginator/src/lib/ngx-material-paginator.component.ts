@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'ngx-material-paginator',
@@ -10,11 +10,16 @@ export class NgxMaterialPaginatorComponent {
   _defConfigData = {
     curpage: 1,
     perPage: 10,
-    totalRecords: 100
+    totalRecords: 100,
+    showArrow: false,
+    showArrowLabel: true,
+    prevButtonLabel: 'PREV',
+    nextButtonLabel: 'NEXT',
   }
 
   totPageCount: number = 0;
-  loopBtnArr: any = [];
+  loopBtnArr: any = signal([]);
+  curPageNum: number = 1;
 
   @Input({ required: true })
   set configData(val: any) {
@@ -28,6 +33,7 @@ export class NgxMaterialPaginatorComponent {
   }
 
   nmpCreatePageButton(curPage: number) {
+    this.curPageNum = curPage;
     let btnArr = [];
     const curBtnArr = {
       pageNum: curPage,
@@ -54,10 +60,9 @@ export class NgxMaterialPaginatorComponent {
           });
         }
       }
-      return btnArr = [...beforeBtnArr.reverse(), curBtnArr, ...afterBtnArr];
+      return [...beforeBtnArr.reverse(), curBtnArr, ...afterBtnArr];
     }
-    this.loopBtnArr = btnLoop(curPage);
-    console.log(this.loopBtnArr);
+    this.loopBtnArr.set(btnLoop(curPage));
   }
 
   nmploadPage(pageNum: number) {

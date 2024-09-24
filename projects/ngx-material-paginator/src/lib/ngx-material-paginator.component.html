@@ -1,25 +1,106 @@
 <div class="nmp-main-container-cls">
   <div class="arrow-cls">
-    <button mat-mini-fab aria-label="Example icon button with a heart icon">
+    @if(_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    <button
+      (click)="nmploadPage(curPageNum - 1)"
+      [disabled]="curPageNum === 1 ? true : false"
+      mat-fab
+      extended
+      aria-label="Previous Arrow"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      <span>PREV</span>
+    </button>
+    }@else if(_defConfigData.showArrow && !_defConfigData.showArrowLabel){
+    <button
+      (click)="nmploadPage(curPageNum - 1)"
+      [disabled]="curPageNum === 1 ? true : false"
+      mat-fab
+      aria-label="Previous Arrow"
+    >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
+    }@else if(!_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    <button
+      (click)="nmploadPage(curPageNum - 1)"
+      [disabled]="curPageNum === 1 ? true : false"
+      mat-fab
+      extended
+      aria-label="Previous Arrow"
+    >
+      <span>PREV</span>
+    </button>
+    }@else {
+    <button
+      (click)="nmploadPage(curPageNum - 1)"
+      [disabled]="curPageNum === 1 ? true : false"
+      mat-fab
+      aria-label="Previous Arrow"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    }
   </div>
-  <div class="page-num-container-cls">
-    @for(val of loopBtnArr; track val.pageNum){ @if(val.activeCls){
+  <div class="nmp-page-num-container-cls">
+    @if(curPageNum > 3){
+    <div class="npm-three-dot-cls">...</div>
+    } @for(val of loopBtnArr(); track val.pageNum){ @if(val.activeCls){
     <button mat-button mat-flat-button>{{ val.pageNum }}</button>
     }@else {
     <button (click)="nmploadPage(val.pageNum)" mat-button>
       {{ val.pageNum }}
     </button>
-    } }
-
-    <!-- <button mat-button mat-flat-button>2</button>
-    <button mat-button>3</button>
-    <button mat-button>4</button> -->
+    } } @if(curPageNum <= totPageCount-3){
+    <div class="npm-three-dot-cls">...</div>
+    }
   </div>
   <div class="arrow-cls">
-    <button mat-mini-fab aria-label="Example icon button with a heart icon">
+    @if(_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    <button
+      (click)="nmploadPage(curPageNum + 1)"
+      [disabled]="curPageNum === totPageCount ? true : false"
+      mat-fab
+      extended
+      aria-label="Next Arrow"
+    >
+      <mat-icon>keyboard_arrow_right</mat-icon>
+      <span>PREV</span>
+    </button>
+    }@else if(_defConfigData.showArrow && !_defConfigData.showArrowLabel){
+    <button
+      (click)="nmploadPage(curPageNum + 1)"
+      [disabled]="curPageNum === totPageCount ? true : false"
+      mat-fab
+      aria-label="Next Arrow"
+    >
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
+    }@else if(!_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    <button
+      (click)="nmploadPage(curPageNum + 1)"
+      [disabled]="curPageNum === totPageCount ? true : false"
+      mat-fab
+      extended
+      aria-label="Next Arrow"
+    >
+      <span>NEXT</span>
+    </button>
+    }@else {
+    <button
+      (click)="nmploadPage(curPageNum - 1)"
+      [disabled]="curPageNum === totPageCount ? true : false"
+      mat-fab
+      aria-label="Next Arrow"
+    >
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+    }
   </div>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>

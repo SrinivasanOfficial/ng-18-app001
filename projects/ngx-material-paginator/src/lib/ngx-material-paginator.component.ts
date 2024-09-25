@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, computed, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'ngx-material-paginator',
@@ -7,7 +7,7 @@ import { Component, Input, signal } from '@angular/core';
 })
 export class NgxMaterialPaginatorComponent {
 
-  _defConfigData = {
+  defConfigData = signal({
     curpage: 1,
     perPage: 10,
     totalRecords: 100,
@@ -15,21 +15,23 @@ export class NgxMaterialPaginatorComponent {
     showArrowLabel: true,
     prevButtonLabel: 'PREV',
     nextButtonLabel: 'NEXT',
-  }
+  });
 
-  totPageCount: number = 0;
+  totPageCount = computed(() => {
+    return Math.ceil(this.defConfigData().totalRecords / this.defConfigData().perPage)
+  });
   loopBtnArr: any = signal([]);
   curPageNum: number = 1;
 
   @Input({ required: true })
   set configData(val: any) {
-    this._defConfigData = { ...this._defConfigData, ...val };
-    this.totPageCount = Math.ceil(this._defConfigData.totalRecords / this._defConfigData.perPage);
+    this.defConfigData.update(value => ({
+      ...value, val
+    }));
   }
 
   ngOnInit() {
-    // console.log(this.totPageCount);
-    this.nmpCreatePageButton(10);
+    this.nmpCreatePageButton(this.defConfigData().curpage);
   }
 
   nmpCreatePageButton(curPage: number) {
@@ -53,7 +55,7 @@ export class NgxMaterialPaginatorComponent {
       }
 
       for (let i = (curPageNum + 1); i <= (curPageNum + 2); i++) {
-        if (i <= this.totPageCount) {
+        if (i <= this.totPageCount()) {
           afterBtnArr.push({
             pageNum: i,
             activeCls: false

@@ -1,6 +1,6 @@
 <div class="nmp-main-container-cls">
   <div class="arrow-cls">
-    @if(_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    @if(defConfigData().showArrow && defConfigData().showArrowLabel){
     <button
       (click)="nmploadPage(curPageNum - 1)"
       [disabled]="curPageNum === 1 ? true : false"
@@ -9,9 +9,9 @@
       aria-label="Previous Arrow"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
-      <span>PREV</span>
+      <span>{{ defConfigData().prevButtonLabel }}</span>
     </button>
-    }@else if(_defConfigData.showArrow && !_defConfigData.showArrowLabel){
+    }@else if(defConfigData().showArrow && !defConfigData().showArrowLabel){
     <button
       (click)="nmploadPage(curPageNum - 1)"
       [disabled]="curPageNum === 1 ? true : false"
@@ -20,7 +20,7 @@
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    }@else if(!_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    }@else if(!defConfigData().showArrow && defConfigData().showArrowLabel){
     <button
       (click)="nmploadPage(curPageNum - 1)"
       [disabled]="curPageNum === 1 ? true : false"
@@ -28,7 +28,7 @@
       extended
       aria-label="Previous Arrow"
     >
-      <span>PREV</span>
+      <span>{{ defConfigData().prevButtonLabel }}</span>
     </button>
     }@else {
     <button
@@ -50,45 +50,45 @@
     <button (click)="nmploadPage(val.pageNum)" mat-button>
       {{ val.pageNum }}
     </button>
-    } } @if(curPageNum <= totPageCount-3){
+    } } @if(curPageNum <= totPageCount()-3){
     <div class="npm-three-dot-cls">...</div>
     }
   </div>
   <div class="arrow-cls">
-    @if(_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    @if(defConfigData().showArrow && defConfigData().showArrowLabel){
     <button
       (click)="nmploadPage(curPageNum + 1)"
-      [disabled]="curPageNum === totPageCount ? true : false"
+      [disabled]="curPageNum === totPageCount() ? true : false"
       mat-fab
       extended
       aria-label="Next Arrow"
     >
       <mat-icon>keyboard_arrow_right</mat-icon>
-      <span>PREV</span>
+      <span>{{ defConfigData().nextButtonLabel }}</span>
     </button>
-    }@else if(_defConfigData.showArrow && !_defConfigData.showArrowLabel){
+    }@else if(defConfigData().showArrow && !defConfigData().showArrowLabel){
     <button
       (click)="nmploadPage(curPageNum + 1)"
-      [disabled]="curPageNum === totPageCount ? true : false"
+      [disabled]="curPageNum === totPageCount() ? true : false"
       mat-fab
       aria-label="Next Arrow"
     >
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
-    }@else if(!_defConfigData.showArrow && _defConfigData.showArrowLabel){
+    }@else if(!defConfigData().showArrow && defConfigData().showArrowLabel){
     <button
       (click)="nmploadPage(curPageNum + 1)"
-      [disabled]="curPageNum === totPageCount ? true : false"
+      [disabled]="curPageNum === totPageCount() ? true : false"
       mat-fab
       extended
       aria-label="Next Arrow"
     >
-      <span>NEXT</span>
+      <span>{{ defConfigData().nextButtonLabel }}</span>
     </button>
     }@else {
     <button
       (click)="nmploadPage(curPageNum - 1)"
-      [disabled]="curPageNum === totPageCount ? true : false"
+      [disabled]="curPageNum === totPageCount() ? true : false"
       mat-fab
       aria-label="Next Arrow"
     >
